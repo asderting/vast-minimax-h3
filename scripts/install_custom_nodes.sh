@@ -22,6 +22,11 @@ clone_node () {
 # Core management
 clone_node "https://github.com/Comfy-Org/ComfyUI-Manager.git" "ComfyUI-Manager"
 
+# Model downloaders / browsers
+clone_node "https://github.com/MoonGoblinDev/Civicomfy.git" "Civicomfy"
+clone_node "https://github.com/huchukato/ComfyUI-HuggingFace.git" "ComfyUI-HuggingFace"
+python -m pip install "huggingface_hub>=0.20.0" "requests>=2.25.0"
+
 # Workflow / quality-of-life nodes
 clone_node "https://github.com/rgthree/rgthree-comfy.git" "rgthree-comfy"
 clone_node "https://github.com/kijai/ComfyUI-KJNodes.git" "ComfyUI-KJNodes"
