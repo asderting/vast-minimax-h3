@@ -15,11 +15,27 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Free disk space for CUDA image
+        shell: bash
+        run: |
+          echo "Disk space BEFORE cleanup:"
+          df -h
+
+          sudo rm -rf /usr/local/lib/android || true
+          sudo rm -rf /usr/share/dotnet || true
+          sudo rm -rf /opt/ghc || true
+          sudo rm -rf /opt/hostedtoolcache/CodeQL || true
+          sudo apt-get clean || true
+          sudo docker system prune -af || true
+
+          echo "Disk space AFTER cleanup:"
+          df -h
 
       - name: Lowercase GitHub username
         id: owner
@@ -43,5 +59,3 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ steps.owner.outputs.name }}/vast-minimax-h3:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
