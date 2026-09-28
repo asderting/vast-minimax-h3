@@ -26,7 +26,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && git lfs install \
     && rm -rf /var/lib/apt/lists/*
 
-RUN python -m pip install --upgrade pip setuptools wheel
 
 WORKDIR /opt
 RUN git clone https://github.com/Comfy-Org/ComfyUI.git ComfyUI \
